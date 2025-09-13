@@ -1,30 +1,43 @@
+<?php
+require_once("base.php");
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Réserver un trajet</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
+
 <body>
-    
+
   <div class="container mt-5">
     <h2>Réserver un trajet</h2>
     <form action="reservation.php" method="POST">
-      
+
       <!-- Infos du client -->
       <div class="mb-3">
         <label for="nom" class="form-label">Nom</label>
         <input type="text" class="form-control" id="nom" name="nom" required>
       </div>
+
       <div class="mb-3">
         <label for="prenom" class="form-label">Prénom</label>
         <input type="text" class="form-control" id="prenom" name="prenom" required>
       </div>
+      
       <div class="mb-3">
         <label for="telephone" class="form-label">Téléphone</label>
         <input type="text" class="form-control" id="telephone" name="telephone" required>
       </div>
+
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" required>
@@ -36,24 +49,49 @@
         <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
       </div>
 
-      <!-- Choix du chauffeur -->
 
 <div class="mb-3">
   <label for="chauffeur" class="form-label">Choix du chauffeur</label>
   <select class="form-select" id="chauffeur" name="id_chauffeur">
     <option value="">Pas de préférence</option>
 
-    <?php
-      $stmt = $pdo->query("SELECT id_chauffeur, nom FROM chauffeur ORDER BY nom");
-      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-          echo '<option value="' . htmlspecialchars($row['id_chauffeur']) . '">' . htmlspecialchars($row['nom']) . '</option>';
-      }
-    ?>
+<?php
+require_once("base.php");
+
+$result = mysqli_query($conn, "SELECT id_chauffeur, nom FROM chauffeur ORDER BY nom");
+
+if ($result) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo '<option value="' . htmlspecialchars($row['id_chauffeur']) . '">' . htmlspecialchars($row['nom']) . '</option>';
+  }
+} else {
+  echo '<option disabled>Erreur : ' . htmlspecialchars(mysqli_error($conn)) . '</option>';
+}
+?>
   </select>
 </div>
+
+      <!-- Options supplémentaires -->
+      <div class="mb-3">
+        <label class="form-label">Options supplémentaires</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="bagages" id="bagages">
+          <label class="form-check-label" for="bagages">Bagages</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="animaux" id="animaux">
+          <label class="form-check-label" for="animaux">Animaux</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="siege_enfant" id="siege_enfant">
+          <label class="form-check-label" for="siege_enfant">Siège enfant</label>
+        </div>
+      </div>
 
       <button type="submit" class="btn btn-primary">Réserver</button>
     </form>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
