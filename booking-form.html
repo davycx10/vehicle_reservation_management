@@ -1,3 +1,11 @@
+<?php
+require_once("base.php");
+session_start();
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -36,17 +44,7 @@
         <input type="datetime-local" class="form-control" id="datetime" required>
       </div>
 
-      <!-- Type de véhicule -->
-      <div class="mb-3">
-        <label for="vehicule" class="form-label">Type de véhicule souhaité</label>
-        <select class="form-select" id="vehicule" required>
-          <option value="">Sélectionnez un véhicule</option>
-          <option value="berline">Berline</option>
-          <option value="suv">SUV</option>
-          <option value="van">Van</option>
-          <option value="luxury">Luxe</option>
-        </select>
-      </div>
+
 
       <!-- Choix du chauffeur -->
       <div class="mb-3">
