@@ -1,43 +1,48 @@
 <?php
+// Récupérer les options sélectionnées
+$options = isset($_POST['options']) ? $_POST['options'] : [];
 
-// Connexion à MySQL (adapté pour phpMyAdmin en local : root sans mot de passe)
-
-require_once("base.php");
-session_start();
-
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Connexion échouée: " . $conn->connect_error);
-}
-
-// Récupération des données du formulaire
+// Récupérer les autres informations du formulaire
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
 $telephone = $_POST['telephone'];
 $email = $_POST['email'];
-$date_heure = $_POST['datetime'];
-$id_chauffeur = $_POST['chauffeur'];
+$datetime = $_POST['datetime'];
+$id_chauffeur = $_POST['id_chauffeur'];
+$lieu_depart = $_POST['lieu_depart'];
+$lieu_arrive = $_POST['lieu_arrive'];
 
-// Étape 1 : insérer le client (ou vérifier s'il existe déjà)
-$sql_client = "INSERT INTO client (nom, prenom, telephone, email) VALUES (?,?,?,?)";
-$stmt = $conn->prepare($sql_client);
-$stmt->bind_param("ssss", $nom, $prenom, $telephone, $email);
-$stmt->execute();
+// Insérer la réservation dans la table `reservation`
+$query = "INSERT INTO reservation (id_client, id_chauffeur, date_heure, lieu_depart, lieu_arrive, status)
+          VALUES (?, ?, ?, ?, ?, 'réservé')";
 
-// Récupérer l'id du client inséré
-$id_client = $stmt->insert_id;
+$stmt = mysqli_prepare($conn, $query);
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, 'iisss', $id_client, $id_chauffeur, $datetime, $lieu_depart, $lieu_arrive);
+    if (mysqli_stmt_execute($stmt)) {
+        // Récupérer l'ID de la réservation insérée
+        $id_reservation = mysqli_insert_id($conn);
 
-// Étape 2 : insérer la réservation
-$sql_reservation = "INSERT INTO reservation (id_client, id_chauffeur, date_heure, status) VALUES (?,?,?,?)";
-$stmt2 = $conn->prepare($sql_reservation);
-$status = "réservé";
-$stmt2->bind_param("iiss", $id_client, $id_chauffeur, $date_heure, $status);
-
-if ($stmt2->execute()) {
-    echo "<h3>✅ Réservation enregistrée avec succès !</h3>";
+        // Insérer les options sélectionnées dans `reservation_options`
+        foreach ($options as $id_option) {
+            $query_option = "INSERT INTO reservation_options (id_reservation, id_option) VALUES (?, ?)";
+            $stmt_option = mysqli_prepare($conn, $query_option);
+            if ($stmt_option) {
+                mysqli_stmt_bind_param($stmt_option, 'ii', $id_reservation, $id_option);
+                mysqli_stmt_execute($stmt_option);
+                mysqli_stmt_close($stmt_option);
+            }
+        }
+        echo "Réservation réussie !";
+    } else {
+        echo "Erreur lors de la réservation : " . mysqli_error($conn);
+    }
+    mysqli_stmt_close($stmt);
 } else {
-    echo "Erreur: " . $stmt2->error;
+    echo "Erreur : " . mysqli_error($conn);
 }
 
-$conn->close();
+// Fermeture de la connexion
+mysqli_close($conn);
 ?>
+

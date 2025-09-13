@@ -15,7 +15,7 @@ include('layout.php');
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Réserver un trajet</title>
+  <title>Réservation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -85,21 +85,31 @@ if ($result) {
 </div>
 
       <!-- Options supplémentaires -->
-      <div class="mb-3">
-        <label class="form-label">Options supplémentaires</label>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="bagages" id="bagages">
-          <label class="form-check-label" for="bagages">Bagages</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="animaux" id="animaux">
-          <label class="form-check-label" for="animaux">Animaux</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="siege_enfant" id="siege_enfant">
-          <label class="form-check-label" for="siege_enfant">Siège enfant</label>
-        </div>
-      </div>
+<div class="mb-3">
+  <label for="options" class="form-label">Options supplémentaires</label>
+  <div class="form-check">
+    <?php
+    // Connexion à la base de données
+   
+
+    // Récupérer toutes les options
+    $result = mysqli_query($conn, "SELECT id_option, nom FROM options");
+
+    if ($result) {
+      // Afficher chaque option comme une case à cocher
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div class="form-check">';
+        echo '<input class="form-check-input" type="checkbox" value="' . htmlspecialchars($row['id_option']) . '" id="option' . $row['id_option'] . '" name="options[]">';
+        echo '<label class="form-check-label" for="option' . $row['id_option'] . '">' . htmlspecialchars($row['nom']) . '</label>';
+        echo '</div>';
+      }
+    } else {
+      echo '<div class="form-check">Erreur : ' . htmlspecialchars(mysqli_error($conn)) . '</div>';
+    }
+    ?>
+  </div>
+</div>
+
 
       <button type="submit" class="btn btn-primary">Réserver</button>
     </form>

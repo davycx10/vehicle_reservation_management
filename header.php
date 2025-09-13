@@ -16,7 +16,7 @@
           <a class="nav-link" href="#">Chauffeurs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Réservation</a>
+          <a class="nav-link" href="booking-form.php">Réservation</a>
         </li>
       </ul>
     </div>
