@@ -1,0 +1,54 @@
+/* Espacement autour de la navbar */
+.navbar {
+  margin-bottom: 30px; /* Espacement sous la barre de navigation */
+  display: flex; /* Utilisation de flexbox */
+  justify-content: flex-start; /* Aligner le logo à gauche sans trop d'espace */
+  align-items: center; /* Centrer verticalement les éléments de la navbar */
+  width: 100%; /* Assurer que la navbar prend toute la largeur */
+  font-size: 1.5rem; /* Augmenter la taille de la police */
+}
+
+/* Espacement autour de chaque item du menu */
+.nav-item {
+  margin-left: 50px; /* Espace entre les éléments du menu */
+  margin-right: 50px;
+}
+
+/* Centrer uniquement les éléments du menu (pas le logo) */
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* Centrer les éléments horizontalement */
+  flex-grow: 0.5; /* Permet à la navbar-nav de prendre plus de place */
+}
+
+/* Personnaliser le logo ou le titre */
+.navbar-brand {
+  font-size: 2rem; /* Augmenter la taille du texte */
+  font-weight: bold; /* Rendre le texte en gras */
+  color: #343a40; /* Modifier la couleur du texte */
+  margin-right: 30px; /* Ajuster l'espace entre le logo et le menu */
+}
+
+/* Ajouter une animation de survol avec un changement de couleur */
+.nav-link {
+  transition: all 0.3s ease; /* Douce transition lors du survol */
+}
+
+.nav-link:hover {
+  background-color: #007bff; /* Fond bleu au survol */
+  color: #fff; /* Texte blanc */
+  border-radius: 5px; /* Bord arrondi */
+}
+
+/* Espacement des éléments dans la version mobile */
+@media (max-width: 767px) {
+  .navbar-nav {
+    text-align: center; /* Centrer les éléments dans le menu mobile */
+    display: flex;
+    flex-direction: column; /* Empiler les éléments du menu sur les petits écrans */
+  }
+  
+  .nav-item {
+    margin-bottom: 15px; /* Espacement supplémentaire entre les éléments */
+  }
+}
