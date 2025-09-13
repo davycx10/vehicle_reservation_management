@@ -3,79 +3,47 @@ require_once("base.php");
 session_start();
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Réserver un trajet</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <title> header</title>
+  <!-- Lien vers Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/test.css">
 </head>
-
 <body>
-    
-  <div class="container mt-5">
-    <h2>Réserver un trajet</h2>
-    <form action="reservation.php" method="POST">
-      
-      <!-- Infos du client -->
-      <div class="mb-3">
-        <label for="nom" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="nom" name="nom" required>
+
+  <!-- Début du header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Mon Site</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Page</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Chauffeurs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Réservation</a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
+  <!-- Fin du header -->
 
-      <div class="mb-3">
-        <label for="prenom" class="form-label">Prénom</label>
-        <input type="text" class="form-control" id="prenom" name="prenom" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="telephone" class="form-label">Téléphone</label>
-        <input type="text" class="form-control" id="telephone" name="telephone" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-      </div>
-
-      <!-- Date et heure du trajet -->
-      <div class="mb-3">
-        <label for="datetime" class="form-label">Date et heure du trajet</label>
-        <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
-      </div>
-
-      <!-- Choix du chauffeur -->
-
-<div class="mb-3">
-  <label for="chauffeur" class="form-label">Choix du chauffeur</label>
-  <select class="form-select" id="chauffeur" name="id_chauffeur">
-    <option value="">Pas de préférence</option>
-
-<?php
-require_once("base.php");
-
-$result = mysqli_query($conn, "SELECT id_chauffeur, nom FROM chauffeur ORDER BY nom");
-
-if ($result) {
-  while ($row = mysqli_fetch_assoc($result)) {
-    echo '<option value="' . htmlspecialchars($row['id_chauffeur']) . '">' . htmlspecialchars($row['nom']) . '</option>';
-  }
-} else {
-  echo '<option disabled>Erreur : ' . htmlspecialchars(mysqli_error($conn)) . '</option>';
-}
-?>
-
-  </select>
-</div>
-
-      <button type="submit" class="btn btn-primary">Réserver</button>
-    </form>
-  </div>
+  <!-- Lien vers Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

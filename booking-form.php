@@ -1,6 +1,10 @@
 <?php
 require_once("base.php");
 session_start();
+
+// Inclure le layout global
+include('layout.php');
+
 ?>
 
 
@@ -49,6 +53,15 @@ session_start();
         <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
       </div>
 
+      <div class="mb-3">
+        <label for="lieu_depart" class="form-label"> Lieu de départ</label>
+        <input type="text" class="form-control" id="lieu_depart" name="lieu_depart" required>
+      </div>
+      
+      <div class="mb-3">
+        <label for="lieu_arrive" class="form-label"> Lieu d'arrivé</label>
+        <input type="text" class="form-control" id="arrive" name="lieu_arrive" required>
+      </div>
 
 <div class="mb-3">
   <label for="chauffeur" class="form-label">Choix du chauffeur</label>
