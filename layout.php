@@ -8,10 +8,11 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo isset($title) ? $title : "Réservation"; ?></title>
+  <title><?php echo isset($title) ? $title : "ChauffeurGO"; ?></title>
   
   <!-- Lien vers Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/header.css">
   
   <!-- Lien vers ton fichier CSS personnalisé -->
   <link rel="stylesheet" href="css/header.css">

@@ -17,7 +17,7 @@ include('layout.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Réservation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="css/footer.css">
 </head>
 
 <body>
@@ -88,8 +88,9 @@ if ($result) {
 <div class="mb-3">
   <label for="options" class="form-label">Options supplémentaires</label>
   <div class="form-check">
+
     <?php
-    // Connexion à la base de données
+      require_once("base.php");
    
 
     // Récupérer toutes les options
@@ -114,6 +115,15 @@ if ($result) {
       <button type="submit" class="btn btn-primary">Réserver</button>
     </form>
   </div>
+
+
+    <!-- Footer -->
+
+
+    <?php
+        // Inclure le footer
+        include('footer.php');
+    ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
