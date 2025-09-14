@@ -60,6 +60,7 @@ include('layout.php');
             </div>
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="card">
             <img src="images/service.gif" class="card-img-top" alt="Service Entreprise">
@@ -69,6 +70,7 @@ include('layout.php');
             </div>
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="card">
             <img src="images/reserv.gif" class="card-img-top" alt="Réservation Last-Minute">
@@ -76,6 +78,7 @@ include('layout.php');
               <h5 class="card-title">Réservation Last-Minute</h5>
               <p class="card-text">Besoin d'un taxi de dernière minute ? ChauffeurGO est là pour vous, à toute heure de la journée ou de la nuit.</p>
             </div>
+            
           </div>
         </div>
       </div>

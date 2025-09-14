@@ -23,7 +23,7 @@
 
 /* Personnaliser le logo ou le titre */
 .navbar-brand {
-  font-size: 2rem; /* Augmenter la taille du texte */
+  font-size: 3rem; /* Augmenter la taille du texte */
   font-weight: bold; /* Rendre le texte en gras */
   color: #343a40; /* Modifier la couleur du texte */
   margin-right: 30px; /* Ajuster l'espace entre le logo et le menu */
