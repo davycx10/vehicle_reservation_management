@@ -1,49 +1,24 @@
-<?php
-require_once("base.php");
-session_start();
-?>
+<div class="mb-3">
+  <label for="options" class="form-label">Options supplémentaires</label>
+  <div class="form-check">
+    <?php
+    // Connexion à la base de données
+   
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> header</title>
-  <!-- Lien vers Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/test.css">
-</head>
-<body>
+    // Récupérer toutes les options
+    $result = mysqli_query($conn, "SELECT id_option, nom FROM options");
 
-  <!-- Début du header -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Mon Site</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Page</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Chauffeurs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Réservation</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- Fin du header -->
-
-  <!-- Lien vers Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
+    if ($result) {
+      // Afficher chaque option comme une case à cocher
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div class="form-check">';
+        echo '<input class="form-check-input" type="checkbox" value="' . htmlspecialchars($row['id_option']) . '" id="option' . $row['id_option'] . '" name="options[]">';
+        echo '<label class="form-check-label" for="option' . $row['id_option'] . '">' . htmlspecialchars($row['nom']) . '</label>';
+        echo '</div>';
+      }
+    } else {
+      echo '<div class="form-check">Erreur : ' . htmlspecialchars(mysqli_error($conn)) . '</div>';
+    }
+    ?>
+  </div>
+</div>

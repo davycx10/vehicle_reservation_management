@@ -130,3 +130,21 @@ Cas d'utilisation :
                     Voir les véhicules disponibles
 
                     Confirmer la réservation
+
+                    Explication :
+
+Boucle PHP : On récupère toutes les options dans la table options et on génère dynamiquement une case à cocher (<input type="checkbox">) pour chaque option disponible.
+
+name="options[]" : Cela permet de récupérer toutes les options sélectionnées sous forme de tableau (par exemple $_POST['options'] = [1, 2] si l'utilisateur a choisi "Bagages" et "Animaux").
+
+Valeur de l'option (value) : La valeur de chaque case à cocher est l'id_option de la table options, ce qui permet de savoir exactement quelle option a été choisie.
+
+4. Récupérer et insérer les options sélectionnées dans reservation.php
+
+Dans ton fichier reservation.php, il faut récupérer les options sélectionnées et les insérer dans la table de liaison reservation_options.
+
+Insertion de la réservation : La réservation est d'abord insérée dans la table reservation.
+
+Récupérer l'ID de la réservation : Après avoir inséré la réservation, on récupère l'ID de la réservation nouvellement insérée grâce à mysqli_insert_id($conn).
+
+Insertion des options dans reservation_options : Pour chaque option sélectionnée (les IDs récupérés via $_POST['options']), on insère une ligne dans la table reservation_options, qui fait le lien entre la réservation et l'option.

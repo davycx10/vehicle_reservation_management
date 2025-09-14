@@ -5,12 +5,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
+
       <ul class="navbar-nav">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Page</a>
-        </li> -->
+
         <li class="nav-item">
-          <a class="nav-link" href="#">Accueil</a>
+          <a class="nav-link" href="Accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Chauffeurs</a>
@@ -19,6 +18,7 @@
           <a class="nav-link" href="booking-form.php">Réservation</a>
         </li>
       </ul>
+      
     </div>
   </div>
 </nav>

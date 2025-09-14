@@ -1,0 +1,13 @@
+/* style.css */
+footer {
+  padding: 20px 0;
+   margin-top: 30px; 
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
