@@ -10,17 +10,19 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo isset($title) ? $title : "ChauffeurGO"; ?></title>
   
-  <!-- Lien vers Bootstrap CSS -->
+ 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/header.css">
   
-  <!-- Lien vers ton fichier CSS personnalisé -->
-  <link rel="stylesheet" href="css/header.css">
+  
+  
+  <link rel="stylesheet" href="<?= BASE_URL ?>/css/header.css">
 </head>
 <body>
 
   <!-- Inclure le header (Navbar) sur chaque page -->
-  <?php include('header.php'); ?>
+  <?php 
+  include('header.php'); 
+  ?>
 
 
 

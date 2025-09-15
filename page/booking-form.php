@@ -1,9 +1,9 @@
 <?php
-require_once("base.php");
+require_once __DIR__ . '/../include/base.php';
 session_start();
 
 // Inclure le layout global
-include('layout.php');
+include(__DIR__ . '/../include/layout.php');
 
 ?>
 
@@ -17,14 +17,15 @@ include('layout.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Réservation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/css/header.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/css/footer.css">
 </head>
 
 <body>
 
   <div class="container mt-5">
     <h2>Réserver un trajet</h2>
-    <form action="reservation.php" method="POST">
+    <form action="<?= BASE_URL ?>/controller/reservation.php" method="POST">
 
       <!-- Infos du client -->
       <div class="mb-3">
@@ -69,7 +70,7 @@ include('layout.php');
     <option value="">Pas de préférence</option>
 
 <?php
-require_once("base.php");
+require_once __DIR__ . '/../include/base.php';
 
 $result = mysqli_query($conn, "SELECT id_chauffeur, nom FROM chauffeur ORDER BY nom");
 
@@ -90,7 +91,7 @@ if ($result) {
   <div class="form-check">
 
     <?php
-      require_once("base.php");
+      require_once __DIR__ . '/../include/base.php';
    
 
     // Récupérer toutes les options
@@ -122,7 +123,7 @@ if ($result) {
 
     <?php
         // Inclure le footer
-        include('footer.php');
+       include(__DIR__ . '/../include/footer.php');
     ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

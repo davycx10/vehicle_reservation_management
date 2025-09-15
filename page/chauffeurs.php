@@ -1,9 +1,9 @@
 <?php
-require_once("base.php");
+require_once __DIR__ . '/../include/base.php';
 session_start();
 
 // Inclure le layout global
-include('layout.php');
+include(__DIR__ . '/../include/layout.php');
 
 ?>
 
@@ -15,8 +15,8 @@ include('layout.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nos Chauffeurs | ChauffeurGO</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="css/footer.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/css/header.css">
 </head>
 
 <body>
@@ -36,7 +36,7 @@ include('layout.php');
         <!-- Chauffeur Jean Dupont -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/hel.gif" class="card-img-top" alt="Jean Dupont">
+            <img src="<?= BASE_URL ?>/images/hel.gif" class="card-img-top" alt="Jean Dupont">
             <div class="card-body">
               <h5 class="card-title">Jean Dupont</h5>
               <h6 class="card-subtitle mb-2 text-muted">Âge : 35 ans</h6>
@@ -52,7 +52,7 @@ include('layout.php');
         <!-- Chauffeur Marie Martin -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/marie.gif" class="card-img-top" alt="Marie Martin">
+            <img src="<?= BASE_URL ?>/images/marie.gif" class="card-img-top" alt="Marie Martin">
             <div class="card-body">
               <h5 class="card-title">Marie Martin</h5>
               <h6 class="card-subtitle mb-2 text-muted">Âge : 28 ans</h6>
@@ -68,7 +68,7 @@ include('layout.php');
         <!-- Chauffeur Ahmed Benali -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/vege.png" class="card-img-top" alt="Ahmed Benali">
+            <img src="<?= BASE_URL ?>/images/vege.png" class="card-img-top" alt="Ahmed Benali">
             <div class="card-body">
               <h5 class="card-title">Ahmed Benali</h5>
               <h6 class="card-subtitle mb-2 text-muted">Âge : 42 ans</h6>
@@ -84,7 +84,7 @@ include('layout.php');
         <!-- Chauffeur Sophie Leroy -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/sophie.gif" class="card-img-top" alt="Sophie Leroy">
+            <img src="<?= BASE_URL ?>/images/sophie.gif" class="card-img-top" alt="Sophie Leroy">
             <div class="card-body">
               <h5 class="card-title">Sophie Leroy</h5>
               <h6 class="card-subtitle mb-2 text-muted">Âge : 30 ans</h6>
@@ -100,7 +100,7 @@ include('layout.php');
         <!-- Chauffeur Karim Zidane -->
         <div class="col-md-4 mb-4">
           <div class="card">
-            <img src="images/zidane.png" class="card-img-top" alt="Karim Zidane">
+            <img src="<?= BASE_URL ?>/images/zidane.png" class="card-img-top" alt="Karim Zidane">
             <div class="card-body">
               <h5 class="card-title">Karim Zidane</h5>
               <h6 class="card-subtitle mb-2 text-muted">Âge : 38 ans</h6>
@@ -121,7 +121,7 @@ include('layout.php');
 
     <?php
         // Inclure le footer
-        include('footer.php');
+        include(__DIR__ . '/../include/footer.php');
     ?>
 
   <!-- Bootstrap JS -->
