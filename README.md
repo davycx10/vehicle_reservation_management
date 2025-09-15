@@ -32,7 +32,7 @@ Mettre en place une application web MVC avec :
 
 Un formulaire de réservation (client)
 
-Un système d’affichage des véhicules disponibles
+Un système d’affichage des chauffeurs disponibles
 
 Une base de données centralisée
 
@@ -57,21 +57,6 @@ On part sur 2 tables principales (minimum requis) :
          téléphone
 
 
--Véhicule
-
-
-         id
-
-         marque
-
-         modèle
-
-         type (berline, van, etc.)
-
-         chauffeur (nom ou id chauffeur)
-
-         disponibilité (booléen ou créneau horaire)
-
 
 -Réservation
 
@@ -85,37 +70,43 @@ On part sur 2 tables principales (minimum requis) :
          date_heure
 
          statut (en attente, confirmée, annulée)
+
 📗 MPD (Modèle Physique de Données)
 
-
-
 CREATE TABLE client (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100),
-    prenom VARCHAR(100),
-    email VARCHAR(100),
-    telephone VARCHAR(15)
+id INT PRIMARY KEY AUTO_INCREMENT,
+nom VARCHAR(100),
+prenom VARCHAR(100),
+email VARCHAR(100),
+telephone VARCHAR(15)
+);
+
+CREATE TABLE chauffeur (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nom VARCHAR(100),
+prenom VARCHAR(100),
+experience VARCHAR(255)
 );
 
 CREATE TABLE vehicule (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    marque VARCHAR(100),
-    modele VARCHAR(100),
-    type VARCHAR(50),
-    chauffeur VARCHAR(100),
-    disponible BOOLEAN DEFAULT TRUE
+id INT PRIMARY KEY AUTO_INCREMENT,
+marque VARCHAR(100),
+modele VARCHAR(100),
+type VARCHAR(50),
+id_chaueur INT,
+disponible BOOLEAN DEFAULT TRUE,
+FOREIGN KEY (id_chaueur) REFERENCES chaueur(id)
 );
 
 CREATE TABLE reservation (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_client INT,
-    id_vehicule INT,
-    date_heure DATETIME,
-    statut VARCHAR(50) DEFAULT 'en attente',
-    FOREIGN KEY (id_client) REFERENCES client(id),
-    FOREIGN KEY (id_vehicule) REFERENCES vehicule(id)
+id INT PRIMARY KEY AUTO_INCREMENT,
+id_client INT,
+id_vehicule INT,
+date_heure DATETIME,
+statut VARCHAR(50) DEFAULT 'en attente',
+FOREIGN KEY (id_client) REFERENCES client(id),
+FOREIGN KEY (id_vehicule) REFERENCES vehicule(id)
 );
-
 
 
 Cas d’utilisation (Use Case)
@@ -148,3 +139,138 @@ Insertion de la réservation : La réservation est d'abord insérée dans la tab
 Récupérer l'ID de la réservation : Après avoir inséré la réservation, on récupère l'ID de la réservation nouvellement insérée grâce à mysqli_insert_id($conn).
 
 Insertion des options dans reservation_options : Pour chaque option sélectionnée (les IDs récupérés via $_POST['options']), on insère une ligne dans la table reservation_options, qui fait le lien entre la réservation et l'option.
+
+
+
+
+---
+
+# 📘 Documentation – Structure et bonnes pratiques du projet `vehicle_reservation_management`
+
+---
+
+## ⚙️ Inclusion des fichiers PHP
+
+Toujours utiliser `__DIR__` pour référencer des chemins de manière fiable, quel que soit l’emplacement du fichier appelant :
+
+```php
+require_once(__DIR__ . '/../include/base.php');
+```
+
+---
+
+## 🌐 Chemins des ressources (CSS, JS, images)
+
+### Définition de la constante `BASE_URL`
+
+Définir cette constante dans `include/base.php` pour centraliser la racine du projet dans les chemins publics :
+
+```php
+define('BASE_URL', '/vehicle_reservation_management');
+```
+
+### Utilisation recommandée dans les fichiers `.php`
+
+* **CSS** :
+
+```php
+<link rel="stylesheet" href="<?= BASE_URL ?>/css/header.css">
+```
+
+* **Images** :
+
+```php
+<img src="<?= BASE_URL ?>/images/.png" alt="">
+```
+
+* **JavaScript** :
+
+```php
+<script src="<?= BASE_URL ?>/js/app.js"></script>  (si on avait du js personnaliser)
+```
+
+* **Formulaires** :
+
+```php
+<form action="<?= BASE_URL ?>/controller/reservation.php" method="POST">
+```
+
+---
+
+## 📥 Organisation des fichiers PHP
+
+| Dossier      | Contenu                                                                                                                              |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `/include/`  | Fichiers partagés entre plusieurs pages (base de données, layout HTML, pied de page, fonctions utilitaires, etc.)                    |
+| `/page/`     | Pages visibles dans le navigateur, accessibles via l’URL. Contiennent la logique d'affichage.                                        |
+| `/controller/` | Scripts appelés lors de soumissions de formulaires ou d’actions utilisateur (POST/GET). Ne doivent généralement pas générer de HTML. |
+`/CSS/` Scripts CSS
+`/images/` images uiliser
+---
+
+## ✅ Exemple de page bien structurée : `booking-form.php`
+
+```php
+<?php
+require_once(__DIR__ . '/../include/base.php');
+require_once(__DIR__ . '/../include/layout.php');
+?>
+
+<div class="container mt-5">
+  <h2>Réserver un trajet</h2>
+  <form action="<?= BASE_URL ?>/controller/reservation.php" method="POST">
+    <!-- Champs du formulaire -->
+    <button type="submit" class="btn btn-primary">Réserver</button>
+  </form>
+</div>
+
+<?php include(__DIR__ . '/../include/footer.php'); ?>
+```
+
+---
+
+## 📦 Intégration de Bootstrap
+
+Inclure Bootstrap CSS et JS depuis le CDN dans le layout ou directement dans les pages :
+
+```html
+<!-- Dans le <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Avant la fermeture du <body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+```
+
+---
+
+## ⚠️ Précautions courantes
+
+| Cas fréquent                                     | Solution recommandée                                                     |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| Chemins relatifs qui cassent (CSS, images, etc.) | Utiliser `BASE_URL` ou `asset()` pour générer des chemins absolus        |
+| Fichier déplacé mais non mis à jour              | Vérifier que les `include` et `form action` pointent vers le bon fichier |
+| Formulaires sans traitement visible              | S'assurer que le fichier ciblé par `action="..."` existe bien            |
+| Styles Bootstrap absents                         | Vérifier que le **CDN CSS Bootstrap** est bien chargé dans le `<head>`   |
+
+---
+
+## 🧪 Débogage utile
+
+* Utiliser l’outil **Inspecter > Réseau (Network)** du navigateur pour vérifier si :
+
+  * Les fichiers CSS/JS/images sont bien chargés
+  * Le formulaire est bien envoyé au bon endpoint
+* Vérifier les erreurs PHP dans `/var/log/apache2/error.log` :
+
+```bash
+sudo tail -n 20 /var/log/apache2/error.log
+```
+
+---
+
+## ✅ Résultat attendu
+
+Une application PHP structurée, modulaire, lisible, avec des chemins stables pour les ressources, des includes fiables, et une séparation claire entre affichage (`/page/`) et logique (`/controller/`).
+
+---
+

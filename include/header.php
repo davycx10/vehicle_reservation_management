@@ -12,7 +12,7 @@
           <a class="nav-link" href="Accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Chauffeurs</a>
+          <a class="nav-link" href="chauffeurs.php">Chauffeurs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="booking-form.php">Réservation</a>

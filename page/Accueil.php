@@ -1,9 +1,9 @@
 <?php
-require_once("base.php");
+require_once __DIR__ . '/../include/base.php';
 session_start();
 
 // Inclure le layout global
-include('layout.php');
+include(__DIR__ . '/../include/layout.php');
 
 ?>
 
@@ -17,7 +17,8 @@ include('layout.php');
   <title>ChauffeurGO - Transport Urgent et Sur-Mesure</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/css/header.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/css/footer.css">
 </head>
 
 <body>
@@ -40,7 +41,7 @@ include('layout.php');
           <p>Nous nous engageons à répondre à vos besoins de transport de manière rapide, efficace et professionnelle. Disponible 24/7, ChauffeurGO est votre solution pour tous vos déplacements urgents ou de dernière minute.</p>
         </div>
         <div class="col-md-6">
-          <img src="images/pinguin_team.png" class="img-fluid rounded" alt="Notre Histoire">
+          <img src="<?= BASE_URL ?>/images/pinguin_team.png" class="img-fluid rounded" alt="Notre Histoire">
         </div>
       </div>
     </div>
@@ -53,29 +54,32 @@ include('layout.php');
       <div class="row">
         <div class="col-md-4">
           <div class="card">
-            <img src="images/transport.gif" class="card-img-top" alt="Transport Urgent">
+            <img src="<?= BASE_URL ?>/images/transport.gif" class="card-img-top" alt="Transport Urgent">
             <div class="card-body">
               <h5 class="card-title">Transport Urgent</h5>
               <p class="card-text">Réservez un taxi rapidement, à toute heure, pour vos besoins urgents. Nous intervenons immédiatement.</p>
             </div>
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="card">
-            <img src="images/service.gif" class="card-img-top" alt="Service Entreprise">
+            <img src="<?= BASE_URL ?>/images/service.gif" class="card-img-top" alt="Service Entreprise">
             <div class="card-body">
               <h5 class="card-title">Service Entreprise</h5>
               <p class="card-text">Réservez un chauffeur pour vos déplacements professionnels. Nous vous garantissons ponctualité et confort.</p>
             </div>
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="card">
-            <img src="images/reserv.gif" class="card-img-top" alt="Réservation Last-Minute">
+            <img src="<?= BASE_URL ?>/images/reserv.gif" class="card-img-top" alt="Réservation Last-Minute">
             <div class="card-body">
               <h5 class="card-title">Réservation Last-Minute</h5>
               <p class="card-text">Besoin d'un taxi de dernière minute ? ChauffeurGO est là pour vous, à toute heure de la journée ou de la nuit.</p>
             </div>
+            
           </div>
         </div>
       </div>
@@ -109,7 +113,7 @@ include('layout.php');
 
     <?php
         // Inclure le footer
-        include('footer.php');
+        include(__DIR__ . '/../include/footer.php');
     ?>
 
   <!-- Bootstrap JS -->
@@ -118,3 +122,5 @@ include('layout.php');
 </body>
 
 </html>
+
+
